@@ -122,14 +122,20 @@
     <Compile Include="Rule.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Store.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StoreForm.Designer.cs">
       <DependentUpon>StoreForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Store.cs">
-      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
@@ -195,7 +201,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\PasswordIcon.png" />
@@ -204,19 +212,19 @@
     <None Include="Images\UserIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Jewelry_StoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Jewelry_StoreModel.Context.cs</LastGenOutput>
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
+      <LastGenOutput>Jewelry_StoreModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Jewelry_StoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
       <LastGenOutput>Jewelry_StoreModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

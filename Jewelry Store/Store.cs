@@ -20,8 +20,8 @@ namespace Jewelry_Store
             this.Products = new HashSet<Product>();
         }
     
-        public Nullable<decimal> TotalProductCost { get; set; }
         public int ObjectId { get; set; }
+        public Nullable<decimal> TotalProductCost { get; set; }
     
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

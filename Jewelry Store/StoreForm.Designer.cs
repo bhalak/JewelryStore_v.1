@@ -29,82 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.objectIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.streetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numOfStreetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.AlertBtn = new System.Windows.Forms.Button();
             this.AddBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.locationBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.locationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).BeginInit();
+            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numOfStreetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.streetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.objectIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.objectIdDataGridViewTextBoxColumn,
-            this.storeDataGridViewTextBoxColumn,
-            this.countryDataGridViewTextBoxColumn,
-            this.cityDataGridViewTextBoxColumn,
-            this.streetDataGridViewTextBoxColumn,
-            this.numOfStreetDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.locationBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 45);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(760, 307);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // objectIdDataGridViewTextBoxColumn
-            // 
-            this.objectIdDataGridViewTextBoxColumn.DataPropertyName = "ObjectId";
-            this.objectIdDataGridViewTextBoxColumn.HeaderText = "ObjectId";
-            this.objectIdDataGridViewTextBoxColumn.Name = "objectIdDataGridViewTextBoxColumn";
-            // 
-            // storeDataGridViewTextBoxColumn
-            // 
-            this.storeDataGridViewTextBoxColumn.DataPropertyName = "Store";
-            this.storeDataGridViewTextBoxColumn.HeaderText = "Сумарна вартість товарів";
-            this.storeDataGridViewTextBoxColumn.Name = "storeDataGridViewTextBoxColumn";
-            // 
-            // countryDataGridViewTextBoxColumn
-            // 
-            this.countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
-            this.countryDataGridViewTextBoxColumn.HeaderText = "Країна";
-            this.countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
-            // 
-            // cityDataGridViewTextBoxColumn
-            // 
-            this.cityDataGridViewTextBoxColumn.DataPropertyName = "City";
-            this.cityDataGridViewTextBoxColumn.HeaderText = "Місто";
-            this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
-            // 
-            // streetDataGridViewTextBoxColumn
-            // 
-            this.streetDataGridViewTextBoxColumn.DataPropertyName = "Street";
-            this.streetDataGridViewTextBoxColumn.HeaderText = "Вулиця";
-            this.streetDataGridViewTextBoxColumn.Name = "streetDataGridViewTextBoxColumn";
-            // 
-            // numOfStreetDataGridViewTextBoxColumn
-            // 
-            this.numOfStreetDataGridViewTextBoxColumn.DataPropertyName = "NumOfStreet";
-            this.numOfStreetDataGridViewTextBoxColumn.HeaderText = "Номер вулиці";
-            this.numOfStreetDataGridViewTextBoxColumn.Name = "numOfStreetDataGridViewTextBoxColumn";
-            // 
-            // locationBindingSource
-            // 
-            this.locationBindingSource.DataSource = typeof(Jewelry_Store.Location);
             // 
             // button1
             // 
@@ -124,6 +68,7 @@
             this.AlertBtn.TabIndex = 21;
             this.AlertBtn.Text = "Редагувати дані";
             this.AlertBtn.UseVisualStyleBackColor = true;
+            this.AlertBtn.Click += new System.EventHandler(this.AlertBtn_Click);
             // 
             // AddBtn
             // 
@@ -159,9 +104,71 @@
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // locationBindingSource2
+            // 
+            this.locationBindingSource2.DataSource = typeof(Jewelry_Store.Location);
+            // 
             // locationBindingSource1
             // 
             this.locationBindingSource1.DataSource = typeof(Jewelry_Store.Location);
+            // 
+            // locationBindingSource
+            // 
+            this.locationBindingSource.DataSource = typeof(Jewelry_Store.Location);
+            // 
+            // numOfStreetDataGridViewTextBoxColumn
+            // 
+            this.numOfStreetDataGridViewTextBoxColumn.DataPropertyName = "NumOfStreet";
+            this.numOfStreetDataGridViewTextBoxColumn.HeaderText = "Номер вулиці";
+            this.numOfStreetDataGridViewTextBoxColumn.Name = "numOfStreetDataGridViewTextBoxColumn";
+            // 
+            // streetDataGridViewTextBoxColumn
+            // 
+            this.streetDataGridViewTextBoxColumn.DataPropertyName = "Street";
+            this.streetDataGridViewTextBoxColumn.HeaderText = "Вулиця";
+            this.streetDataGridViewTextBoxColumn.Name = "streetDataGridViewTextBoxColumn";
+            // 
+            // cityDataGridViewTextBoxColumn
+            // 
+            this.cityDataGridViewTextBoxColumn.DataPropertyName = "City";
+            this.cityDataGridViewTextBoxColumn.HeaderText = "Місто";
+            this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
+            // 
+            // countryDataGridViewTextBoxColumn
+            // 
+            this.countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
+            this.countryDataGridViewTextBoxColumn.HeaderText = "Країна";
+            this.countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
+            // 
+            // storeDataGridViewTextBoxColumn
+            // 
+            this.storeDataGridViewTextBoxColumn.DataPropertyName = "Store";
+            this.storeDataGridViewTextBoxColumn.HeaderText = "Сумарна вартість товарів";
+            this.storeDataGridViewTextBoxColumn.Name = "storeDataGridViewTextBoxColumn";
+            // 
+            // objectIdDataGridViewTextBoxColumn
+            // 
+            this.objectIdDataGridViewTextBoxColumn.DataPropertyName = "ObjectId";
+            this.objectIdDataGridViewTextBoxColumn.HeaderText = "ObjectId";
+            this.objectIdDataGridViewTextBoxColumn.Name = "objectIdDataGridViewTextBoxColumn";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.objectIdDataGridViewTextBoxColumn,
+            this.storeDataGridViewTextBoxColumn,
+            this.countryDataGridViewTextBoxColumn,
+            this.cityDataGridViewTextBoxColumn,
+            this.streetDataGridViewTextBoxColumn,
+            this.numOfStreetDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.locationBindingSource2;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 45);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(760, 307);
+            this.dataGridView1.TabIndex = 0;
             // 
             // StoreForm
             // 
@@ -177,22 +184,15 @@
             this.Name = "StoreForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Магазини";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn objectIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn storeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn streetDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numOfStreetDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource locationBindingSource;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button AlertBtn;
@@ -200,5 +200,13 @@
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.BindingSource locationBindingSource1;
+        private System.Windows.Forms.BindingSource locationBindingSource2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numOfStreetDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn streetDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn objectIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

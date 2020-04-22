@@ -18,3 +18,23 @@ C:\Users\gal_b\source\repos\Jewelry Store\Jewelry Store\obj\Debug\Jewelry_Store.
 C:\Users\gal_b\source\repos\Jewelry Store\Jewelry Store\obj\Debug\Jewelry_Store.UsersForm.resources
 C:\Users\gal_b\source\repos\Jewelry Store\Jewelry Store\obj\Debug\Jewelry_Store.NewShopForm.resources
 C:\Users\gal_b\source\repos\Jewelry Store\Jewelry Store\obj\Debug\Jewelry_Store.StoreForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\Jewelry Store.exe.config
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\Jewelry Store.exe
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\Jewelry Store.pdb
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\EntityFramework.dll
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\EntityFramework.xml
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.csprojAssemblyReference.cache
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.AuthorizationForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.MainWindowForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.NewShopForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.NewUserForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.Properties.Resources.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.StoreForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.UsersForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.csproj.GenerateResource.cache
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.csproj.CoreCompileInputs.cache
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.csproj.CopyComplete
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.exe
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry Store.pdb

@@ -10,16 +10,13 @@
 namespace Jewelry_Store
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Location
+    public partial class sp_helpdiagrams_Result
     {
-        public int ObjectId { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string NumOfStreet { get; set; }
-    
-        public virtual Store Store { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

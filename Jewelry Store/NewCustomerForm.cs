@@ -10,20 +10,14 @@ using System.Windows.Forms;
 
 namespace Jewelry_Store
 {
-    public partial class NewShopForm : Form
+    public partial class NewCustomerForm : Form
     {
-        public NewShopForm()
+        public NewCustomerForm()
         {
             InitializeComponent();
-            this.CountryTextBox.MaxLength = 50;
-            this.CityTextBox.MaxLength = 50;
-            this.StreetTextBox.MaxLength = 50;
-            this.NumOfStreetTextBox.MaxLength = 6;
             this.StartPosition = FormStartPosition.CenterParent;
-        }
-
-        private void NewShopForm_Load(object sender, EventArgs e)
-        {
+            EmailTextBox.MaxLength = 50;
+            PhoneNumberTextBox.MaxLength = 12;
 
         }
 

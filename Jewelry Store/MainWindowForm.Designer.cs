@@ -106,6 +106,7 @@
             this.CustomersButton.TabIndex = 6;
             this.CustomersButton.Text = "Покупці";
             this.CustomersButton.UseVisualStyleBackColor = true;
+            this.CustomersButton.Click += new System.EventHandler(this.CustomersButton_Click);
             // 
             // ComponentsButton
             // 
@@ -124,6 +125,7 @@
             this.ProductTypesButton.TabIndex = 8;
             this.ProductTypesButton.Text = "Типи товарів";
             this.ProductTypesButton.UseVisualStyleBackColor = true;
+            this.ProductTypesButton.Click += new System.EventHandler(this.ProductTypesButton_Click);
             // 
             // ShopsButton
             // 

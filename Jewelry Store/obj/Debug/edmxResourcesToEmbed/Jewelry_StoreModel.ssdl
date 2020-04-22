@@ -52,7 +52,7 @@
     <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TotalMass" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="Store_ref" Type="int" Nullable="false" />
+    <Property Name="Store_ref" Type="int" />
     <Property Name="IsAvaliable" Type="bit" Nullable="false" />
     <Property Name="Type_ref" Type="int" Nullable="false" />
   </EntityType>
@@ -183,7 +183,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Store">
-    <End Role="Store" Type="Self.Store" Multiplicity="1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Store">

@@ -43,6 +43,7 @@ namespace Jewelry_Store
 
 
                 User user = db.data.Users.Find(id);
+
                 db.data.Users.Remove(user);
 
                 db.data.SaveChanges();

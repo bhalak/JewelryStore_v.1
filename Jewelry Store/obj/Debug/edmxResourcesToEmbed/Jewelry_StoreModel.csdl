@@ -60,7 +60,7 @@
     <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TotalMass" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="Store_ref" Type="Int32" Nullable="false" />
+    <Property Name="Store_ref" Type="Int32" />
     <Property Name="IsAvaliable" Type="Boolean" Nullable="false" />
     <Property Name="Type_ref" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Order_Product" Relationship="Self.FK_Order_Product_Product" FromRole="Product" ToRole="Order_Product" />
@@ -215,7 +215,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Store">
-    <End Role="Store" Type="Self.Store" Multiplicity="1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Store">

@@ -44,8 +44,6 @@ namespace Jewelry_Store
 
             do
             {
-
-
                 DialogResult result = newShopForm.ShowDialog(this);
                 if (result == DialogResult.Cancel)
                 {
@@ -97,6 +95,7 @@ namespace Jewelry_Store
                 }
 
                 Store store = db.data.Stores.Find(id);
+
                 db.data.Stores.Remove(store);
 
                 Location location = db.data.Locations.Find(id);
@@ -130,8 +129,6 @@ namespace Jewelry_Store
 
                 do
                 {
-
-
                     DialogResult result = newShopForm.ShowDialog(this);
                     if (result == DialogResult.Cancel)
                     {
@@ -161,6 +158,11 @@ namespace Jewelry_Store
                 db.data.SaveChanges();
                 dataGridView1.Refresh();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

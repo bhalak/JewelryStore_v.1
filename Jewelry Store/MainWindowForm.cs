@@ -51,5 +51,19 @@ namespace Jewelry_Store
             this.Hide();
             storeForm.Show();
         }
+
+        private void ProductTypesButton_Click(object sender, EventArgs e)
+        {
+            var typeForm = new PtoductTypesForm();
+            this.Hide();
+            typeForm.Show();
+        }
+
+        private void CustomersButton_Click(object sender, EventArgs e)
+        {
+            var customersForm = new CustomersForm();
+            this.Hide();
+            customersForm.Show();
+        }
     }
 }

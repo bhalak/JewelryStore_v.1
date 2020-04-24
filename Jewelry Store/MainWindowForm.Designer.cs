@@ -116,6 +116,7 @@
             this.ComponentsButton.TabIndex = 7;
             this.ComponentsButton.Text = "Компоненти";
             this.ComponentsButton.UseVisualStyleBackColor = true;
+            this.ComponentsButton.Click += new System.EventHandler(this.ComponentsButton_Click);
             // 
             // ProductTypesButton
             // 

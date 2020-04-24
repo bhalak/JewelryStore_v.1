@@ -42,3 +42,5 @@ C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Deb
 C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.NewTypeForm.resources
 C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.CustomersForm.resources
 C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.NewCustomerForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.ComponentsForm.resources
+C:\Users\gal_b\source\repos\Jewelry Store\JewelryStore_v.1\Jewelry Store\obj\Debug\Jewelry_Store.NewComponentForm.resources

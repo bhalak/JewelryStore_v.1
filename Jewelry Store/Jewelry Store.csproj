@@ -64,6 +64,12 @@
     <Compile Include="Component.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComponentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentsForm.Designer.cs">
+      <DependentUpon>ComponentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
@@ -91,6 +97,12 @@
     </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewComponentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewComponentForm.Designer.cs">
+      <DependentUpon>NewComponentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewCustomerForm.cs">
       <SubType>Form</SubType>
@@ -179,8 +191,14 @@
     <EmbeddedResource Include="AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComponentsForm.resx">
+      <DependentUpon>ComponentsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomersForm.resx">
       <DependentUpon>CustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewComponentForm.resx">
+      <DependentUpon>NewComponentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewCustomerForm.resx">
       <DependentUpon>NewCustomerForm.cs</DependentUpon>
@@ -224,6 +242,7 @@
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Component.datasource" />
     <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\Location.datasource" />
     <None Include="Properties\DataSources\Type.datasource" />

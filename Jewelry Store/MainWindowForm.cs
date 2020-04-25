@@ -32,8 +32,6 @@ namespace Jewelry_Store
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //AuthorizationForm form = new AuthorizationForm();
-            //form.Show();
             GlobalInfo.authorizationForm.Show();
             GlobalInfo.mainWindow.Close();
         }
@@ -78,6 +76,13 @@ namespace Jewelry_Store
             var productsForm = new ProductsForm();
             this.Hide();
             productsForm.Show();
+        }
+
+        private void OrdersButton_Click(object sender, EventArgs e)
+        {
+            var ordersForm = new OrdersForm();
+            this.Hide();
+            ordersForm.Show();
         }
     }
 }

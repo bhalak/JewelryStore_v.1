@@ -72,6 +72,14 @@ namespace Jewelry_Store
             this.Close();
         }
 
+        private void countStoreProductCost(int storeId)
+        {
+            Store store = db.data.Stores.Find(storeId);
+            store.TotalProductCost = db.data.Products.Where(p => p.Store_ref == store.ObjectId && p.IsAvaliable).Sum(p => p.Price);
+            db.data.Entry(store).State = EntityState.Modified;
+            db.data.SaveChanges();
+
+        }
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -87,6 +95,15 @@ namespace Jewelry_Store
 
                 Product product = db.data.Products.Find(id);
 
+                if (db.data.Order_Product.Any(p => p.Product_ref == product.ProductId))
+                {
+                    MessageBox.Show("Даний продукт був проданий і знаходиться в таблиці 'Замовлення'," +
+                                    " тому його не можна видалити зі списку");
+                    return;
+                }
+
+                int store_ref = Int32.Parse(product.Store_ref.ToString());
+
                 db.data.Product_Component.RemoveRange(db.data.Product_Component
                     .Where(pc => pc.Product_ref == product.ProductId));
                 db.data.Products.Remove(product);
@@ -94,6 +111,7 @@ namespace Jewelry_Store
                 db.data.SaveChanges();
                 dataGridView1.Refresh();
 
+                countStoreProductCost(store_ref);
             }
 
         }
@@ -245,6 +263,8 @@ namespace Jewelry_Store
             }
 
             db.data.SaveChanges();
+
+            countStoreProductCost(Int32.Parse(newProduct.Store_ref.ToString()));
         }
 
         private decimal getProductMass()
@@ -274,6 +294,14 @@ namespace Jewelry_Store
 
                 Product newProduct = db.data.Products.Find(id);
                 var newProductForm = new NewProductForm();
+
+                if (!newProduct.IsAvaliable)
+                {
+                    if (db.data.Order_Product.Any(op => op.Product_ref == newProduct.ProductId))
+                    {
+                        newProductForm.IsAvaibleCheckBox.Enabled = false;
+                    }
+                }
 
                 initializeComboBoxes();
                 newProductForm.TypeComboBox.DataSource = db.data.Types.ToList();
@@ -332,8 +360,6 @@ namespace Jewelry_Store
                     }
                 } while (true);
 
-                //List<Product_Component> productComponents = new List<Product_Component>();
-                //productComponents.AddRange( );
 
                 db.data.Product_Component.RemoveRange(db.data.Product_Component
                     .Where(pc => pc.Product_ref == newProduct.ProductId));
@@ -361,6 +387,8 @@ namespace Jewelry_Store
 
                 db.data.SaveChanges();
                 dataGridView1.Refresh();
+
+                countStoreProductCost(Int32.Parse(newProduct.Store_ref.ToString()));
             }
         }
 

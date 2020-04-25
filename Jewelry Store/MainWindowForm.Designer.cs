@@ -98,6 +98,7 @@
             this.OrdersButton.TabIndex = 5;
             this.OrdersButton.Text = "Замовлення";
             this.OrdersButton.UseVisualStyleBackColor = true;
+            this.OrdersButton.Click += new System.EventHandler(this.OrdersButton_Click);
             // 
             // CustomersButton
             // 

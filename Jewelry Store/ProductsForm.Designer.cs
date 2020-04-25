@@ -35,6 +35,8 @@
             this.AddBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ComponentsListBox = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalMassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,8 +44,6 @@
             this.isAvaliableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ComponentsListBox = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -124,6 +124,24 @@
             this.dataGridView1.TabIndex = 30;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             // 
+            // ComponentsListBox
+            // 
+            this.ComponentsListBox.FormattingEnabled = true;
+            this.ComponentsListBox.ItemHeight = 16;
+            this.ComponentsListBox.Location = new System.Drawing.Point(796, 92);
+            this.ComponentsListBox.Name = "ComponentsListBox";
+            this.ComponentsListBox.Size = new System.Drawing.Size(183, 196);
+            this.ComponentsListBox.TabIndex = 36;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(824, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 17);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "Склад товару";
+            // 
             // productIdDataGridViewTextBoxColumn
             // 
             this.productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
@@ -169,24 +187,6 @@
             // productBindingSource
             // 
             this.productBindingSource.DataSource = typeof(Jewelry_Store.Product);
-            // 
-            // ComponentsListBox
-            // 
-            this.ComponentsListBox.FormattingEnabled = true;
-            this.ComponentsListBox.ItemHeight = 16;
-            this.ComponentsListBox.Location = new System.Drawing.Point(796, 92);
-            this.ComponentsListBox.Name = "ComponentsListBox";
-            this.ComponentsListBox.Size = new System.Drawing.Size(183, 196);
-            this.ComponentsListBox.TabIndex = 36;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(824, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 17);
-            this.label1.TabIndex = 37;
-            this.label1.Text = "Склад товару";
             // 
             // ProductsForm
             // 

@@ -126,6 +126,12 @@
     <Compile Include="Order.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdersForm.Designer.cs">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Order_Product.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
@@ -222,6 +228,9 @@
     <EmbeddedResource Include="NewTypeForm.resx">
       <DependentUpon>NewTypeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrdersForm.resx">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductsForm.resx">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +273,7 @@
     <None Include="Properties\DataSources\Component.datasource" />
     <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\Location.datasource" />
+    <None Include="Properties\DataSources\Order.datasource" />
     <None Include="Properties\DataSources\Product.datasource" />
     <None Include="Properties\DataSources\Type.datasource" />
     <None Include="Properties\DataSources\User.datasource" />

@@ -16,7 +16,7 @@ namespace Jewelry_Store
     {
         public int Product_ref { get; set; }
         public int Order_ref { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public Nullable<decimal> CurrentCost { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

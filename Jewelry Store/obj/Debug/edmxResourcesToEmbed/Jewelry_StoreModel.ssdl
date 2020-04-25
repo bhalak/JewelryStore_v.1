@@ -33,7 +33,7 @@
     <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_ref" Type="int" />
     <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
     <Property Name="Customer_ref" Type="int" />
   </EntityType>
   <EntityType Name="Order_Product">
@@ -43,15 +43,15 @@
     </Key>
     <Property Name="Product_ref" Type="int" Nullable="false" />
     <Property Name="Order_ref" Type="int" Nullable="false" />
-    <Property Name="Quantity" Type="int" />
+    <Property Name="CurrentCost" Type="decimal" Precision="18" Scale="3" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductId" />
     </Key>
     <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="TotalMass" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="TotalMass" Type="decimal" Precision="18" Scale="3" Nullable="false" />
     <Property Name="Store_ref" Type="int" />
     <Property Name="IsAvaliable" Type="bit" Nullable="false" />
     <Property Name="Type_ref" Type="int" Nullable="false" />
@@ -63,7 +63,7 @@
     </Key>
     <Property Name="Component_ref" Type="int" Nullable="false" />
     <Property Name="Product_ref" Type="int" Nullable="false" />
-    <Property Name="PartMass" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="PartMass" Type="decimal" Precision="18" Scale="3" Nullable="false" />
   </EntityType>
   <EntityType Name="Rule">
     <Key>

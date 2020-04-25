@@ -46,7 +46,7 @@
         <MappingFragment StoreEntitySet="Order_Product">
           <ScalarProperty Name="Product_ref" ColumnName="Product_ref" />
           <ScalarProperty Name="Order_ref" ColumnName="Order_ref" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="CurrentCost" ColumnName="CurrentCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -35,11 +35,11 @@
             this.AddBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.customerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accountSumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -110,43 +110,48 @@
             this.dataGridView1.DataSource = this.customerBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 46);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(760, 307);
             this.dataGridView1.TabIndex = 24;
-            // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(Jewelry_Store.Customer);
             // 
             // customerIdDataGridViewTextBoxColumn
             // 
             this.customerIdDataGridViewTextBoxColumn.DataPropertyName = "CustomerId";
             this.customerIdDataGridViewTextBoxColumn.HeaderText = "Id";
             this.customerIdDataGridViewTextBoxColumn.Name = "customerIdDataGridViewTextBoxColumn";
+            this.customerIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // emailDataGridViewTextBoxColumn
             // 
             this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
             this.emailDataGridViewTextBoxColumn.HeaderText = "Електронна пошта";
             this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // phoneNumberDataGridViewTextBoxColumn
             // 
             this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
             this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "Номер телефону";
             this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
+            this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // accountSumDataGridViewTextBoxColumn
             // 
             this.accountSumDataGridViewTextBoxColumn.DataPropertyName = "AccountSum";
             this.accountSumDataGridViewTextBoxColumn.HeaderText = "Сума покупок";
             this.accountSumDataGridViewTextBoxColumn.Name = "accountSumDataGridViewTextBoxColumn";
+            this.accountSumDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(Jewelry_Store.Customer);
             // 
             // CustomersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 498);
+            this.ClientSize = new System.Drawing.Size(800, 463);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AlertBtn);
@@ -168,11 +173,11 @@
         private System.Windows.Forms.Button AlertBtn;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button DeleteBtn;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn accountSumDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource customerBindingSource;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

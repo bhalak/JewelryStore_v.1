@@ -70,6 +70,7 @@
     <Compile Include="ComponentsForm.Designer.cs">
       <DependentUpon>ComponentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constituents.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
@@ -110,6 +111,12 @@
     <Compile Include="NewCustomerForm.Designer.cs">
       <DependentUpon>NewCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProductForm.Designer.cs">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +131,12 @@
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductsForm.Designer.cs">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductTypesForm.cs">
       <SubType>Form</SubType>
@@ -203,8 +216,14 @@
     <EmbeddedResource Include="NewCustomerForm.resx">
       <DependentUpon>NewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewProductForm.resx">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewTypeForm.resx">
       <DependentUpon>NewTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductsForm.resx">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductTypesForm.resx">
       <DependentUpon>ProductTypesForm.cs</DependentUpon>
@@ -245,6 +264,7 @@
     <None Include="Properties\DataSources\Component.datasource" />
     <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\Location.datasource" />
+    <None Include="Properties\DataSources\Product.datasource" />
     <None Include="Properties\DataSources\Type.datasource" />
     <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">

@@ -88,6 +88,7 @@
             this.ProductsButton.TabIndex = 4;
             this.ProductsButton.Text = "Товари";
             this.ProductsButton.UseVisualStyleBackColor = true;
+            this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
             // 
             // OrdersButton
             // 

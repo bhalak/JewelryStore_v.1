@@ -12,5 +12,7 @@ namespace Jewelry_Store
         public static MainWindowForm mainWindow { get; set; }
 
         public static AuthorizationForm authorizationForm { get; set; }
-}
+
+        internal static List<Constituents> constituents { get; set; }
+    }
 }

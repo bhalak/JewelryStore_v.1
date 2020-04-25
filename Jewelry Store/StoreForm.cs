@@ -13,6 +13,7 @@ namespace Jewelry_Store
 {
     public partial class StoreForm : Form
     {
+
         public StoreForm()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace Jewelry_Store
             GlobalInfo.mainWindow.Show();
             this.Close();
         }
+
 
         private void AddBtn_Click(object sender, EventArgs e)
         {

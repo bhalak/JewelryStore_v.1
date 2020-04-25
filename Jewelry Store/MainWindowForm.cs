@@ -72,5 +72,12 @@ namespace Jewelry_Store
             this.Hide();
             componentsForm.Show();
         }
+
+        private void ProductsButton_Click(object sender, EventArgs e)
+        {
+            var productsForm = new ProductsForm();
+            this.Hide();
+            productsForm.Show();
+        }
     }
 }

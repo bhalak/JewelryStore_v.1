@@ -134,7 +134,7 @@
         <PropertyRef Name="ComponentId" />
       </Principal>
       <Dependent Role="Product_Component">
-        <PropertyRef Name="Product_ref" />
+        <PropertyRef Name="Component_ref" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -201,16 +201,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Component_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Product_Component" Type="Self.Product_Component" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="ProductId" />
       </Principal>
       <Dependent Role="Product_Component">
-        <PropertyRef Name="Component_ref" />
+        <PropertyRef Name="Product_ref" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

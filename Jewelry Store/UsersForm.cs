@@ -123,7 +123,7 @@ namespace Jewelry_Store
 
                 newUserForm.LoginTextBox.Text = user.Login;
                 newUserForm.PasswordTextBox.Text = user.Password;
-                newUserForm.LevelAccesComboBox.SelectedItem = user.Rule.LevelAccess;
+                newUserForm.LevelAccesComboBox.SelectedValue= user.Rule.RuleId;
                 newUserForm.FullNameTextBox.Text = user.FullName;
 
 

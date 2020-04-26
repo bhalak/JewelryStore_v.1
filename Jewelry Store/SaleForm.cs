@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace Jewelry_Store
 
         private void SellButton_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (dataGridView1.SelectedRows.Count > 0)
@@ -119,7 +121,10 @@ namespace Jewelry_Store
                     productsList.AddRange(db.data.Products.Where(p => p.IsAvaliable));
                     dataGridView1.DataSource = productsList;
                     dataGridView1.Refresh();
-                    MessageBox.Show("Товар був успішно проданий.");
+
+                    saveReceipt(currentOrder);
+
+                   MessageBox.Show("Товар був успішно проданий.");
                 }
             }
             catch (Exception exception)
@@ -128,6 +133,49 @@ namespace Jewelry_Store
                 throw;
             }
             
+        }
+
+        private void saveReceipt(Order currentOrder)
+        {
+            string writePath = @"C:\Users\gal_b\source\repos\Jewelry Store\Jewelry Store\Receipts\Receipt_" 
+                               + currentOrder.OrderId + ".txt";
+            string receipt = "Компанія JewelryStore" +
+                             "\nДата оформлення: " + currentOrder.Date + "\n" 
+                             + "Id покупця: " + currentOrder.Customer_ref + "\n" +
+                            "-----------------------------------\n" +
+                            "КУПЛЕНІ ТОВАРИ:";
+            var orderProductsJoin = from ord_prod in db.data.Order_Product
+                join prod in db.data.Products on ord_prod.Product_ref equals prod.ProductId
+                join ord in db.data.Orders on ord_prod.Order_ref equals ord.OrderId
+                where ord.OrderId == currentOrder.OrderId
+                select new
+                {
+                    id = prod.ProductId,
+                    type = prod.Type.TypeName,
+                    price = ord_prod.CurrentCost
+                };
+            foreach (var prod in orderProductsJoin)
+            {
+                receipt += "\n" + $"id({prod.id}) {prod.type} - {prod.price}грн";
+            }
+            receipt += "\n-----------------------------------\n" +
+                       "Загальна сума: " + currentOrder.TotalPrice + " грн\n" +
+                "Касир: " + currentOrder.User.FullName +
+                "\n\n\nСлужба підтримки: 0-800-500-609\n" +
+                       "ФІСКАЛЬНИЙ ЧЕК";
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+                {
+                    sw.WriteLine(receipt);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private void IsCustomerInSystemCheckBox_CheckedChanged(object sender, EventArgs e)

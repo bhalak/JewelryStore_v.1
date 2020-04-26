@@ -69,6 +69,7 @@
             this.SaleButton.TabIndex = 2;
             this.SaleButton.Text = "Продаж";
             this.SaleButton.UseVisualStyleBackColor = true;
+            this.SaleButton.Click += new System.EventHandler(this.SaleButton_Click);
             // 
             // UsersButton
             // 

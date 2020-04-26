@@ -42,11 +42,9 @@ namespace Jewelry_Store
 
             GlobalInfo.authorizationForm = this;
             GlobalInfo.mainWindow = new MainWindowForm();
-            GlobalInfo.mainWindow.LoginLabel.Text = userLogin;           
-            GlobalInfo.currentUserLevelAccess = db.data.Users
-                .FirstOrDefault(u => u.Login == userLogin)
-                .Rule
-                .LevelAccess;
+            GlobalInfo.mainWindow.LoginLabel.Text = userLogin;
+            GlobalInfo.currentUser = db.data.Users
+                .FirstOrDefault(u => u.Login == userLogin);
 
             PasswordTextBox.Text = "";
             LoginTextBox.Text = "";

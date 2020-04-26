@@ -8,7 +8,7 @@ namespace Jewelry_Store
 {
   public static class GlobalInfo
     {
-        public static string currentUserLevelAccess { get; set; }
+        public static User currentUser { get; set; }
         public static MainWindowForm mainWindow { get; set; }
 
         public static AuthorizationForm authorizationForm { get; set; }

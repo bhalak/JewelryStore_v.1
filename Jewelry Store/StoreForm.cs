@@ -98,6 +98,13 @@ namespace Jewelry_Store
 
                 Store store = db.data.Stores.Find(id);
 
+                if (db.data.Products.Any(p => p.Store_ref == store.ObjectId))
+                {
+                    MessageBox.Show("У цьому магазині знаходяться товари," +
+                                    " тому його не можна видалити");
+                    return;
+                }
+
                 db.data.Stores.Remove(store);
 
                 Location location = db.data.Locations.Find(id);

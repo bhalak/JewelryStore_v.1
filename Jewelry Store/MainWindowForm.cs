@@ -84,5 +84,12 @@ namespace Jewelry_Store
             this.Hide();
             ordersForm.Show();
         }
+
+        private void SaleButton_Click(object sender, EventArgs e)
+        {
+            var saleForm = new SaleForm();
+            this.Hide();
+            saleForm.Show();
+        }
     }
 }

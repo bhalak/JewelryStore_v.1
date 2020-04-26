@@ -44,6 +44,11 @@ namespace Jewelry_Store
         {
             try
             {
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+                {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                    return;
+                }
                 var newShopForm = new NewShopForm();
 
                 do
@@ -96,6 +101,12 @@ namespace Jewelry_Store
         {
             try
             {
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+                {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                    return;
+                }
+
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     int index = dataGridView1.SelectedRows[0].Index;
@@ -137,6 +148,12 @@ namespace Jewelry_Store
         {
             try
             {
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+                {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                    return;
+                }
+
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     int index = dataGridView1.SelectedRows[0].Index;

@@ -38,6 +38,11 @@ namespace Jewelry_Store
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
             var usersForm = new UsersForm();
             this.Hide();
             usersForm.Show();
@@ -52,6 +57,12 @@ namespace Jewelry_Store
 
         private void ProductTypesButton_Click(object sender, EventArgs e)
         {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
+
             var typeForm = new PtoductTypesForm();
             this.Hide();
             typeForm.Show();
@@ -66,6 +77,11 @@ namespace Jewelry_Store
 
         private void ComponentsButton_Click(object sender, EventArgs e)
         {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
             var componentsForm = new ComponentsForm();
             this.Hide();
             componentsForm.Show();

@@ -38,11 +38,20 @@ namespace Jewelry_Store
         {
             GlobalInfo.mainWindow.Show();
             this.Close();
+
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            showProducts();
+            try
+            {
+                showProducts();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }           
         }
 
         private void showProducts()

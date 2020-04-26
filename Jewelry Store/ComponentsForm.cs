@@ -40,51 +40,9 @@ namespace Jewelry_Store
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            var newComponentForm = new NewComponentForm();
-
-            do
+            try
             {
-                DialogResult result = newComponentForm.ShowDialog(this);
-                if (result == DialogResult.Cancel)
-                {
-                    return;
-                }
-
-                if (newComponentForm.ComponentNameTextBox.Text.Trim() == "")
-                {
-                    MessageBox.Show("Усі поля повинні бути заповнені!");
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
-            } while (true);
-
-            Component newComponent = new Component();
-            newComponent.PartName = newComponentForm.ComponentNameTextBox.Text;
-
-            db.data.Components.Add(newComponent);
-            db.data.SaveChanges();
-        }
-
-        private void AlertBtn_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
-                {
-                    return;
-                }
-
-                Component newComponent = db.data.Components.Find(id);
-
                 var newComponentForm = new NewComponentForm();
-                newComponentForm.ComponentNameTextBox.Text = newComponent.PartName;
 
                 do
                 {
@@ -105,43 +63,111 @@ namespace Jewelry_Store
                     }
                 } while (true);
 
+                Component newComponent = new Component();
                 newComponent.PartName = newComponentForm.ComponentNameTextBox.Text;
 
-                db.data.Entry(newComponent).State = EntityState.Modified;
+                db.data.Components.Add(newComponent);
                 db.data.SaveChanges();
-                dataGridView1.Refresh();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }          
+        }
+
+        private void AlertBtn_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Component newComponent = db.data.Components.Find(id);
+
+                    var newComponentForm = new NewComponentForm();
+                    newComponentForm.ComponentNameTextBox.Text = newComponent.PartName;
+
+                    do
+                    {
+                        DialogResult result = newComponentForm.ShowDialog(this);
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        if (newComponentForm.ComponentNameTextBox.Text.Trim() == "")
+                        {
+                            MessageBox.Show("Усі поля повинні бути заповнені!");
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (true);
+
+                    newComponent.PartName = newComponentForm.ComponentNameTextBox.Text;
+
+                    db.data.Entry(newComponent).State = EntityState.Modified;
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
             }
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    return;
+
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Component component = db.data.Components.Find(id);
+
+                    int numProducts = db.data.Product_Component
+                        .Count(p_c => p_c.Component_ref == component.ComponentId);
+                    if (numProducts > 0)
+                    {
+                        MessageBox.Show("Неможливо виконати видалення, оскільки в базі даних " +
+                                        "існує товар який містить вибрану компоненту.");
+                        return;
+                    }
+
+                    db.data.Components.Remove(component);
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
                 }
-
-                Component component = db.data.Components.Find(id);
-
-                int numProducts = db.data.Product_Component
-                    .Count(p_c=>p_c.Component_ref == component.ComponentId);
-                if (numProducts > 0)
-                {
-                    MessageBox.Show("Неможливо виконати видалення, оскільки в базі даних " +
-                                    "існує товар який містить вибрану компоненту.");
-                    return;
-                }
-
-                db.data.Components.Remove(component);
-                db.data.SaveChanges();
-                dataGridView1.Refresh();
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
         }
     }
 }

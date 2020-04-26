@@ -82,43 +82,60 @@ namespace Jewelry_Store
         }
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    return;
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Product product = db.data.Products.Find(id);
+
+                    if (db.data.Order_Product.Any(p => p.Product_ref == product.ProductId))
+                    {
+                        MessageBox.Show("Даний продукт був проданий і знаходиться в таблиці 'Замовлення'," +
+                                        " тому його не можна видалити зі списку");
+                        return;
+                    }
+
+                    int store_ref = Int32.Parse(product.Store_ref.ToString());
+
+                    db.data.Product_Component.RemoveRange(db.data.Product_Component
+                        .Where(pc => pc.Product_ref == product.ProductId));
+                    db.data.Products.Remove(product);
+
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+
+                    countStoreProductCost(store_ref);
                 }
 
-                Product product = db.data.Products.Find(id);
-
-                if (db.data.Order_Product.Any(p => p.Product_ref == product.ProductId))
-                {
-                    MessageBox.Show("Даний продукт був проданий і знаходиться в таблиці 'Замовлення'," +
-                                    " тому його не можна видалити зі списку");
-                    return;
-                }
-
-                int store_ref = Int32.Parse(product.Store_ref.ToString());
-
-                db.data.Product_Component.RemoveRange(db.data.Product_Component
-                    .Where(pc => pc.Product_ref == product.ProductId));
-                db.data.Products.Remove(product);
-
-                db.data.SaveChanges();
-                dataGridView1.Refresh();
-
-                countStoreProductCost(store_ref);
             }
-
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            showComponents();
+            try
+            {
+                showComponents();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+           
         }
 
         private void initializeComboBoxes()
@@ -187,133 +204,13 @@ namespace Jewelry_Store
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-  
-            var newProductForm = new NewProductForm();
-            initializeComboBoxes();
-            newProductForm.TypeComboBox.DataSource = db.data.Types.ToList();
-            newProductForm.TypeComboBox.ValueMember = "TypeId";
-            newProductForm.TypeComboBox.DisplayMember = "TypeName";
-
-            do
+            try
             {
-                DialogResult result = newProductForm.ShowDialog(this);
-                if (result == DialogResult.Cancel)
-                {
-                    return;
-                }
-
-                if (newProductForm.PriceTextBox.Text.Trim() == "" ||
-                    newProductForm.StoreIdTextBox.Text.Trim() == "" ||
-                    !checkMassEntered())
-                {
-                    MessageBox.Show("Усі поля повинні бути заповнені!");
-                    continue;
-                }
-                else if(!checkUniqueness())
-                {
-                    MessageBox.Show("Усі компоненти повинні бути різного виду!");
-                    continue;
-                }
-                else if(!Int32.TryParse(newProductForm.StoreIdTextBox.Text.Trim(), out int n) )
-                {
-                    MessageBox.Show("Неправильний формат Id магазину. Id повонине бути числом.");
-                    continue;
-                }
-
-                int StoreId = Int32.Parse(newProductForm.StoreIdTextBox.Text );
-                if (db.data.Stores.Where(s=>s.ObjectId == StoreId).Count() == 0)
-                {
-                    MessageBox.Show("Tакого Id магазину не існує, спробуйте інше");
-                }
-                else if(!float.TryParse(newProductForm.PriceTextBox.Text, out float n))
-                {
-                    MessageBox.Show("Неправильно вказана ціна товару. Ціна повинн бути числом.");
-                }
-                else if(!checkMassFloat())
-                {
-                    MessageBox.Show("Непраильно вказана маса складника. Маса повинна бути числом.");
-                }
-                else
-                {
-                    break;
-                }
-            } while (true);
-
-            Product newProduct = new Product();
-
-            newProduct.Price = decimal.Parse(newProductForm.PriceTextBox.Text);
-            newProduct.Store_ref = Int32.Parse(newProductForm.StoreIdTextBox.Text);
-            newProduct.IsAvaliable = newProductForm.IsAvaibleCheckBox.Checked;
-            newProduct.Type_ref = Int32.Parse(newProductForm.TypeComboBox.SelectedValue.ToString() );
-            newProduct.TotalMass = getProductMass();
-
-            db.data.Products.Add(newProduct);
-
-            Product_Component prod_com;
-
-            for (int i = 0; i < Constituents.numComponents; i++)
-            {
-                prod_com = new Product_Component();
-
-                prod_com.Product_ref = newProduct.ProductId;
-                prod_com.Component_ref = Int32.Parse(GlobalInfo.constituents[i].comboBox.SelectedValue.ToString());
-                prod_com.PartMass = decimal.Parse(GlobalInfo.constituents[i].textBox.Text);
-
-                db.data.Product_Component.Add(prod_com);
-            }
-
-            db.data.SaveChanges();
-
-            countStoreProductCost(Int32.Parse(newProduct.Store_ref.ToString()));
-        }
-
-        private decimal getProductMass()
-        {
-            decimal ProductMass = 0;
-
-            for (int i = 0; i < Constituents.numComponents; i++)
-            {
-                ProductMass += decimal.Parse(GlobalInfo.constituents[i].textBox.Text);
-            }
-
-            return ProductMass;
-        }
-
-        private void AlertBtn_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
-                {
-                    return;
-                }
-
-                Product newProduct = db.data.Products.Find(id);
                 var newProductForm = new NewProductForm();
-
-                if (!newProduct.IsAvaliable)
-                {
-                    if (db.data.Order_Product.Any(op => op.Product_ref == newProduct.ProductId))
-                    {
-                        newProductForm.IsAvaibleCheckBox.Enabled = false;
-                    }
-                }
-
                 initializeComboBoxes();
                 newProductForm.TypeComboBox.DataSource = db.data.Types.ToList();
                 newProductForm.TypeComboBox.ValueMember = "TypeId";
                 newProductForm.TypeComboBox.DisplayMember = "TypeName";
-
-                newProductForm.PriceTextBox.Text = newProduct.Price.ToString();
-                newProductForm.StoreIdTextBox.Text = newProduct.Store_ref.ToString();
-                newProductForm.IsAvaibleCheckBox.Checked = newProduct.IsAvaliable;
-                newProductForm.TypeComboBox.SelectedValue = newProduct.Type_ref;
-
-                addComponentsOnForm(newProductForm, newProduct);
 
                 do
                 {
@@ -360,9 +257,7 @@ namespace Jewelry_Store
                     }
                 } while (true);
 
-
-                db.data.Product_Component.RemoveRange(db.data.Product_Component
-                    .Where(pc => pc.Product_ref == newProduct.ProductId));
+                Product newProduct = new Product();
 
                 newProduct.Price = decimal.Parse(newProductForm.PriceTextBox.Text);
                 newProduct.Store_ref = Int32.Parse(newProductForm.StoreIdTextBox.Text);
@@ -370,7 +265,7 @@ namespace Jewelry_Store
                 newProduct.Type_ref = Int32.Parse(newProductForm.TypeComboBox.SelectedValue.ToString());
                 newProduct.TotalMass = getProductMass();
 
-                db.data.Entry(newProduct).State = EntityState.Modified;
+                db.data.Products.Add(newProduct);
 
                 Product_Component prod_com;
 
@@ -386,10 +281,149 @@ namespace Jewelry_Store
                 }
 
                 db.data.SaveChanges();
-                dataGridView1.Refresh();
 
                 countStoreProductCost(Int32.Parse(newProduct.Store_ref.ToString()));
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
+        }
+
+        private decimal getProductMass()
+        {
+            decimal ProductMass = 0;
+
+            for (int i = 0; i < Constituents.numComponents; i++)
+            {
+                ProductMass += decimal.Parse(GlobalInfo.constituents[i].textBox.Text);
+            }
+
+            return ProductMass;
+        }
+
+        private void AlertBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Product newProduct = db.data.Products.Find(id);
+                    var newProductForm = new NewProductForm();
+
+                    if (!newProduct.IsAvaliable)
+                    {
+                        if (db.data.Order_Product.Any(op => op.Product_ref == newProduct.ProductId))
+                        {
+                            newProductForm.IsAvaibleCheckBox.Enabled = false;
+                        }
+                    }
+
+                    initializeComboBoxes();
+                    newProductForm.TypeComboBox.DataSource = db.data.Types.ToList();
+                    newProductForm.TypeComboBox.ValueMember = "TypeId";
+                    newProductForm.TypeComboBox.DisplayMember = "TypeName";
+
+                    newProductForm.PriceTextBox.Text = newProduct.Price.ToString();
+                    newProductForm.StoreIdTextBox.Text = newProduct.Store_ref.ToString();
+                    newProductForm.IsAvaibleCheckBox.Checked = newProduct.IsAvaliable;
+                    newProductForm.TypeComboBox.SelectedValue = newProduct.Type_ref;
+
+                    addComponentsOnForm(newProductForm, newProduct);
+
+                    do
+                    {
+                        DialogResult result = newProductForm.ShowDialog(this);
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        if (newProductForm.PriceTextBox.Text.Trim() == "" ||
+                            newProductForm.StoreIdTextBox.Text.Trim() == "" ||
+                            !checkMassEntered())
+                        {
+                            MessageBox.Show("Усі поля повинні бути заповнені!");
+                            continue;
+                        }
+                        else if (!checkUniqueness())
+                        {
+                            MessageBox.Show("Усі компоненти повинні бути різного виду!");
+                            continue;
+                        }
+                        else if (!Int32.TryParse(newProductForm.StoreIdTextBox.Text.Trim(), out int n))
+                        {
+                            MessageBox.Show("Неправильний формат Id магазину. Id повонине бути числом.");
+                            continue;
+                        }
+
+                        int StoreId = Int32.Parse(newProductForm.StoreIdTextBox.Text);
+                        if (db.data.Stores.Where(s => s.ObjectId == StoreId).Count() == 0)
+                        {
+                            MessageBox.Show("Tакого Id магазину не існує, спробуйте інше");
+                        }
+                        else if (!float.TryParse(newProductForm.PriceTextBox.Text, out float n))
+                        {
+                            MessageBox.Show("Неправильно вказана ціна товару. Ціна повинн бути числом.");
+                        }
+                        else if (!checkMassFloat())
+                        {
+                            MessageBox.Show("Непраильно вказана маса складника. Маса повинна бути числом.");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (true);
+
+
+                    db.data.Product_Component.RemoveRange(db.data.Product_Component
+                        .Where(pc => pc.Product_ref == newProduct.ProductId));
+
+                    newProduct.Price = decimal.Parse(newProductForm.PriceTextBox.Text);
+                    newProduct.Store_ref = Int32.Parse(newProductForm.StoreIdTextBox.Text);
+                    newProduct.IsAvaliable = newProductForm.IsAvaibleCheckBox.Checked;
+                    newProduct.Type_ref = Int32.Parse(newProductForm.TypeComboBox.SelectedValue.ToString());
+                    newProduct.TotalMass = getProductMass();
+
+                    db.data.Entry(newProduct).State = EntityState.Modified;
+
+                    Product_Component prod_com;
+
+                    for (int i = 0; i < Constituents.numComponents; i++)
+                    {
+                        prod_com = new Product_Component();
+
+                        prod_com.Product_ref = newProduct.ProductId;
+                        prod_com.Component_ref = Int32.Parse(GlobalInfo.constituents[i].comboBox.SelectedValue.ToString());
+                        prod_com.PartMass = decimal.Parse(GlobalInfo.constituents[i].textBox.Text);
+
+                        db.data.Product_Component.Add(prod_com);
+                    }
+
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+
+                    countStoreProductCost(Int32.Parse(newProduct.Store_ref.ToString()));
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
         }
 
         private void addComponentsOnForm(NewProductForm newProductForm, Product product)

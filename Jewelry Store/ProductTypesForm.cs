@@ -28,21 +28,63 @@ namespace Jewelry_Store
 
         private void AlertBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    return;
-                }
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
 
-                Type newType = db.data.Types.Find(id);
-                
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Type newType = db.data.Types.Find(id);
+
+                    var newTypeForm = new NewTypeForm();
+                    newTypeForm.TypeNameTextBox.Text = newType.TypeName;
+                    do
+                    {
+                        DialogResult result = newTypeForm.ShowDialog(this);
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        if (newTypeForm.TypeNameTextBox.Text.Trim() == "")
+                        {
+                            MessageBox.Show("Усі поля повинні бути заповнені!");
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (true);
+
+
+                    newType.TypeName = newTypeForm.TypeNameTextBox.Text;
+
+                    db.data.Entry(newType).State = EntityState.Modified;
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
+        }
+
+        private void AddBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 var newTypeForm = new NewTypeForm();
-                newTypeForm.TypeNameTextBox.Text = newType.TypeName;
                 do
                 {
                     DialogResult result = newTypeForm.ShowDialog(this);
@@ -62,42 +104,18 @@ namespace Jewelry_Store
                     }
                 } while (true);
 
- 
+                Type newType = new Type();
                 newType.TypeName = newTypeForm.TypeNameTextBox.Text;
 
-                db.data.Entry(newType).State = EntityState.Modified;
+                db.data.Types.Add(newType);
                 db.data.SaveChanges();
-                dataGridView1.Refresh();
             }
-        }
-
-        private void AddBtn_Click(object sender, EventArgs e)
-        {
-            var newTypeForm = new NewTypeForm();
-            do
+            catch (Exception exception)
             {
-                DialogResult result = newTypeForm.ShowDialog(this);
-                if (result == DialogResult.Cancel)
-                {
-                    return;
-                }
-
-                if (newTypeForm.TypeNameTextBox.Text.Trim() == "")
-                {
-                    MessageBox.Show("Усі поля повинні бути заповнені!");
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
-            } while (true);
-
-            Type newType = new Type();
-            newType.TypeName = newTypeForm.TypeNameTextBox.Text;
-
-            db.data.Types.Add(newType);
-            db.data.SaveChanges();
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -114,31 +132,40 @@ namespace Jewelry_Store
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-                int index = dataGridView1.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-
-                if (!converted)
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    return;
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Type type = db.data.Types.Find(id);
+
+                    int numProducts = db.data.Products.Count(p => p.Type_ref == type.TypeId);
+                    if (numProducts > 0)
+                    {
+                        MessageBox.Show("Неможливо виконати видалення, " +
+                                        "оскільки в базі даних існує товар вибраного типу.");
+                        return;
+                    }
+
+                    db.data.Types.Remove(type);
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
                 }
-
-                Type type = db.data.Types.Find(id);
-
-                int numProducts = db.data.Products.Count(p => p.Type_ref == type.TypeId);
-                if (numProducts > 0)
-                {
-                    MessageBox.Show("Неможливо виконати видалення, " +
-                                    "оскільки в базі даних існує товар вибраного типу.");
-                    return;
-                }
-
-                db.data.Types.Remove(type);
-                db.data.SaveChanges();
-                dataGridView1.Refresh();
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
         }
     }
 }

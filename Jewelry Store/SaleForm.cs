@@ -25,9 +25,9 @@ namespace Jewelry_Store
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.MultiSelect = true;
             dataGridView1.ReadOnly = true;
+
             productsList = new List<Product>();
             productsList.AddRange( db.data.Products.Where(p=>p.IsAvaliable) );
-
 
             dataGridView1.DataSource = productsList;
         }

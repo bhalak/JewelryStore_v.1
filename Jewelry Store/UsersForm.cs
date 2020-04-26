@@ -17,6 +17,8 @@ namespace Jewelry_Store
         public UsersForm()
         {
             InitializeComponent();
+            dataGridView1.MultiSelect = false;
+            dataGridView1.ReadOnly = true;
 
             db.data.Users.Load();
             dataGridView1.DataSource = db.data.Users.Local.ToBindingList();

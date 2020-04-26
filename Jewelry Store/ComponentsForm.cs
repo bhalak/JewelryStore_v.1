@@ -21,6 +21,8 @@ namespace Jewelry_Store
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.ReadOnly = true;
 
             db.data.Components.Load();
             dataGridView1.DataSource = db.data.Components.Local.ToBindingList();

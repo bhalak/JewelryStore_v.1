@@ -13,11 +13,17 @@ namespace Jewelry_Store
 {
     public partial class StoreForm : Form
     {
+
         public StoreForm()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.ReadOnly = true;
 
             db.data.Locations.Load();
             dataGridView1.DataSource = db.data.Locations.Local.ToBindingList();
@@ -35,62 +41,181 @@ namespace Jewelry_Store
             this.Close();
         }
 
+
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            var newShopForm = new NewShopForm();
-
-            do
+            try
             {
-
-
-                DialogResult result = newShopForm.ShowDialog(this);
-                if (result == DialogResult.Cancel)
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
                 {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
                     return;
                 }
+                var newShopForm = new NewShopForm();
 
-                if (newShopForm.CityTextBox.Text.Trim() == "" ||
-                    newShopForm.CountryTextBox.Text.Trim() == "" ||
-                    newShopForm.StreetTextBox.Text.Trim() == "" ||
-                    newShopForm.NumOfStreetTextBox.Text.Trim() == "")
+                do
                 {
-                    MessageBox.Show("Усі поля повинні бути заповнені!");
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
-            } while (true);
+                    DialogResult result = newShopForm.ShowDialog(this);
+                    if (result == DialogResult.Cancel)
+                    {
+                        return;
+                    }
 
-            //           User newUser = new User();
-            //newUser.Login = newShopForm.LoginTextBox.Text;
-            //newUser.Password = newUserForm.PasswordTextBox.Text;
-            //newUser.Rule_ref = Int32.Parse(newUserForm.LevelAccesComboBox.SelectedValue.ToString());
-            //newUser.FullName = newUserForm.FullNameTextBox.Text;
-            Location newLocation = new Location();
-            Store newStore = new Store();
+                    if (newShopForm.CityTextBox.Text.Trim() == "" ||
+                        newShopForm.CountryTextBox.Text.Trim() == "" ||
+                        newShopForm.StreetTextBox.Text.Trim() == "" ||
+                        newShopForm.NumOfStreetTextBox.Text.Trim() == "")
+                    {
+                        MessageBox.Show("Усі поля повинні бути заповнені!");
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                } while (true);
 
-            newLocation.Country = newShopForm.CountryTextBox.Text;
-            newLocation.City = newShopForm.CityTextBox.Text;
-            newLocation.Street = newShopForm.StreetTextBox.Text;
-            newLocation.NumOfStreet = Int32.Parse(newShopForm.NumOfStreetTextBox.Text);
+                Location newLocation = new Location();
+                newLocation.Country = newShopForm.CountryTextBox.Text;
+                newLocation.City = newShopForm.CityTextBox.Text;
+                newLocation.Street = newShopForm.StreetTextBox.Text;
+                newLocation.NumOfStreet = newShopForm.NumOfStreetTextBox.Text;
 
-            db.data.Locations.Add(newLocation);
-            db.data.SaveChanges();
-            //           db.data.SaveChanges();
-            //    db.data.Entry(newLocation).State = EntityState.Added;
+                db.data.Locations.Add(newLocation);
+                db.data.SaveChanges();
 
-            newStore.TotalProductCost = 0;
-            newStore.ObjectId = db.data.Locations.Max(l => l.ObjectId);
+                Store newStore = new Store();
+                newStore.TotalProductCost = 0;
+                newStore.ObjectId = db.data.Locations.Max(l => l.ObjectId);
 
-            db.data.Stores.Add(newStore);
-   //         db.data.Entry(newStore).State = EntityState.Added;
+                db.data.Stores.Add(newStore);
+                db.data.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
 
-            db.data.SaveChanges();
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+                {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                    return;
+                }
+
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Store store = db.data.Stores.Find(id);
+
+                    if (db.data.Products.Any(p => p.Store_ref == store.ObjectId))
+                    {
+                        MessageBox.Show("У цьому магазині знаходяться товари," +
+                                        " тому його не можна видалити");
+                        return;
+                    }
+
+                    db.data.Stores.Remove(store);
+
+                    Location location = db.data.Locations.Find(id);
+                    db.data.Locations.Remove(location);
+
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
+        }
+
+        private void AlertBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+                {
+                    MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                    return;
+                }
+
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+
+                    if (!converted)
+                    {
+                        return;
+                    }
+
+                    Location newLocation = db.data.Locations.Find(id);
+                    var newShopForm = new NewShopForm();
+
+                    newShopForm.CountryTextBox.Text = newLocation.Country;
+                    newShopForm.CityTextBox.Text = newLocation.City;
+                    newShopForm.StreetTextBox.Text = newLocation.Street;
+                    newShopForm.NumOfStreetTextBox.Text = newLocation.NumOfStreet;
+
+                    do
+                    {
+                        DialogResult result = newShopForm.ShowDialog(this);
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        if (newShopForm.CityTextBox.Text.Trim() == "" ||
+                            newShopForm.CountryTextBox.Text.Trim() == "" ||
+                            newShopForm.StreetTextBox.Text.Trim() == "" ||
+                            newShopForm.NumOfStreetTextBox.Text.Trim() == "")
+                        {
+                            MessageBox.Show("Усі поля повинні бути заповнені!");
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (true);
+
+                    newLocation.Country = newShopForm.CountryTextBox.Text;
+                    newLocation.City = newShopForm.CityTextBox.Text;
+                    newLocation.Street = newShopForm.StreetTextBox.Text;
+                    newLocation.NumOfStreet = newShopForm.NumOfStreetTextBox.Text;
+
+                    db.data.Entry(newLocation).State = EntityState.Modified;
+                    db.data.SaveChanges();
+                    dataGridView1.Refresh();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }
+            
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

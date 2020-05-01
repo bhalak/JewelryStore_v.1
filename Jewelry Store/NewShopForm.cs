@@ -26,5 +26,10 @@ namespace Jewelry_Store
         {
 
         }
+
+        private void UsersGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

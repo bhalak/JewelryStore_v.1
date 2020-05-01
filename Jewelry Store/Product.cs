@@ -24,7 +24,7 @@ namespace Jewelry_Store
         public int ProductId { get; set; }
         public decimal Price { get; set; }
         public decimal TotalMass { get; set; }
-        public int Store_ref { get; set; }
+        public Nullable<int> Store_ref { get; set; }
         public bool IsAvaliable { get; set; }
         public int Type_ref { get; set; }
     

@@ -22,37 +22,43 @@ namespace Jewelry_Store
 
         private void EnterBtn_Click(object sender, EventArgs e)
         {
-            if (LoginTextBox.Text.Trim() == "" || PasswordTextBox.Text.Trim() == "")
-            {              
-                IncorrectDatrLabel.Text = "Пароль або логін не можуть бути попрожніми";
-                return;
-            }
-
-            var userLogin = LoginTextBox.Text;
-
-            var UsersCount = db.data.Users
-                .Where(u => u.Login == userLogin && u.Password == PasswordTextBox.Text)
-                .Count();
-
-            if (UsersCount == 0)
+            try
             {
-                IncorrectDatrLabel.Text = "Неправильно введений пароль або логін!";
-                return;
+                if (LoginTextBox.Text.Trim() == "" || PasswordTextBox.Text.Trim() == "")
+                {
+                    IncorrectDatrLabel.Text = "Пароль або логін не можуть бути попрожніми";
+                    return;
+                }
+
+                var userLogin = LoginTextBox.Text;
+
+                var UsersCount = db.data.Users
+                    .Where(u => u.Login == userLogin && u.Password == PasswordTextBox.Text)
+                    .Count();
+
+                if (UsersCount == 0)
+                {
+                    IncorrectDatrLabel.Text = "Неправильно введений пароль або логін!";
+                    return;
+                }
+
+                GlobalInfo.authorizationForm = this;
+                GlobalInfo.mainWindow = new MainWindowForm();
+                GlobalInfo.mainWindow.LoginLabel.Text = userLogin;
+                GlobalInfo.currentUser = db.data.Users
+                    .FirstOrDefault(u => u.Login == userLogin);
+
+                PasswordTextBox.Text = "";
+                LoginTextBox.Text = "";
+
+                GlobalInfo.authorizationForm.Hide();
+                GlobalInfo.mainWindow.Show();
             }
-
-            GlobalInfo.authorizationForm = this;
-            GlobalInfo.mainWindow = new MainWindowForm();
-            GlobalInfo.mainWindow.LoginLabel.Text = userLogin;           
-            GlobalInfo.currentUserLevelAccess = db.data.Users
-                .FirstOrDefault(u => u.Login == userLogin)
-                .Rule
-                .LevelAccess;
-
-            PasswordTextBox.Text = "";
-            LoginTextBox.Text = "";
-
-            GlobalInfo.authorizationForm.Hide();
-            GlobalInfo.mainWindow.Show();
+            catch (Exception exception)
+            {
+                MessageBox.Show("Some error occured: " + exception.Message + " - " + exception.Source);
+                throw;
+            }          
         }
 
         private void label3_Click(object sender, EventArgs e)

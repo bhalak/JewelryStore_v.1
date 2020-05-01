@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.UsersGroupBox = new System.Windows.Forms.GroupBox();
+            this.NumOfStreetTextBox = new System.Windows.Forms.TextBox();
             this.CityTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Add_Cancel_btn = new System.Windows.Forms.Button();
@@ -38,7 +39,6 @@
             this.CountryTextBox = new System.Windows.Forms.TextBox();
             this.PasportCodeLabel = new System.Windows.Forms.Label();
             this.LoginLabel = new System.Windows.Forms.Label();
-            this.NumOfStreetTextBox = new System.Windows.Forms.TextBox();
             this.UsersGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +60,15 @@
             this.UsersGroupBox.TabIndex = 7;
             this.UsersGroupBox.TabStop = false;
             this.UsersGroupBox.Text = "Магазин";
+            this.UsersGroupBox.Enter += new System.EventHandler(this.UsersGroupBox_Enter);
+            // 
+            // NumOfStreetTextBox
+            // 
+            this.NumOfStreetTextBox.Location = new System.Drawing.Point(138, 165);
+            this.NumOfStreetTextBox.MaxLength = 8;
+            this.NumOfStreetTextBox.Name = "NumOfStreetTextBox";
+            this.NumOfStreetTextBox.Size = new System.Drawing.Size(182, 22);
+            this.NumOfStreetTextBox.TabIndex = 11;
             // 
             // CityTextBox
             // 
@@ -138,14 +147,6 @@
             this.LoginLabel.Size = new System.Drawing.Size(56, 17);
             this.LoginLabel.TabIndex = 0;
             this.LoginLabel.Text = "Країна:";
-            // 
-            // NumOfStreetTextBox
-            // 
-            this.NumOfStreetTextBox.Location = new System.Drawing.Point(138, 165);
-            this.NumOfStreetTextBox.MaxLength = 8;
-            this.NumOfStreetTextBox.Name = "NumOfStreetTextBox";
-            this.NumOfStreetTextBox.Size = new System.Drawing.Size(182, 22);
-            this.NumOfStreetTextBox.TabIndex = 11;
             // 
             // NewShopForm
             // 

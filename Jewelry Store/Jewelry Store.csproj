@@ -64,11 +64,23 @@
     <Compile Include="Component.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComponentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentsForm.Designer.cs">
+      <DependentUpon>ComponentsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Constituents.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersForm.Designer.cs">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="db.cs" />
-    <Compile Include="GlobalInfo.cs" />
     <Compile Include="Jewelry_StoreModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +99,58 @@
     <Compile Include="Location.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NewComponentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewComponentForm.Designer.cs">
+      <DependentUpon>NewComponentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCustomerForm.Designer.cs">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProductForm.Designer.cs">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTypeForm.Designer.cs">
+      <DependentUpon>NewTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdersForm.Designer.cs">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order_Product.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductsForm.Designer.cs">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductTypesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductTypesForm.Designer.cs">
+      <DependentUpon>ProductTypesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalInfo.cs" />
     <Compile Include="MainWindowForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,15 +169,6 @@
     <Compile Include="NewUserForm.Designer.cs">
       <DependentUpon>NewUserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Order.cs">
-      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Order_Product.cs">
-      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Product.cs">
-      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Product_Component.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
@@ -122,14 +177,26 @@
     <Compile Include="Rule.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SaleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaleForm.Designer.cs">
+      <DependentUpon>SaleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Store.cs">
+      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StoreForm.Designer.cs">
       <DependentUpon>StoreForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Store.cs">
-      <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Jewelry_StoreModel.tt</DependentUpon>
@@ -148,6 +215,33 @@
     </Compile>
     <EmbeddedResource Include="AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentsForm.resx">
+      <DependentUpon>ComponentsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersForm.resx">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewComponentForm.resx">
+      <DependentUpon>NewComponentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCustomerForm.resx">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProductForm.resx">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTypeForm.resx">
+      <DependentUpon>NewTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdersForm.resx">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductsForm.resx">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductTypesForm.resx">
+      <DependentUpon>ProductTypesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindowForm.resx">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
@@ -168,6 +262,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SaleForm.resx">
+      <DependentUpon>SaleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,7 +279,12 @@
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Component.datasource" />
+    <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\Location.datasource" />
+    <None Include="Properties\DataSources\Order.datasource" />
+    <None Include="Properties\DataSources\Product.datasource" />
+    <None Include="Properties\DataSources\Type.datasource" />
     <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -195,7 +297,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\PasswordIcon.png" />
@@ -204,19 +308,19 @@
     <None Include="Images\UserIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Jewelry_StoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Jewelry_StoreModel.Context.cs</LastGenOutput>
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
+      <LastGenOutput>Jewelry_StoreModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Jewelry_StoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Jewelry_StoreModel.edmx</DependentUpon>
       <LastGenOutput>Jewelry_StoreModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

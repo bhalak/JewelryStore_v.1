@@ -69,6 +69,7 @@
             this.SaleButton.TabIndex = 2;
             this.SaleButton.Text = "Продаж";
             this.SaleButton.UseVisualStyleBackColor = true;
+            this.SaleButton.Click += new System.EventHandler(this.SaleButton_Click);
             // 
             // UsersButton
             // 
@@ -88,6 +89,7 @@
             this.ProductsButton.TabIndex = 4;
             this.ProductsButton.Text = "Товари";
             this.ProductsButton.UseVisualStyleBackColor = true;
+            this.ProductsButton.Click += new System.EventHandler(this.ProductsButton_Click);
             // 
             // OrdersButton
             // 
@@ -97,6 +99,7 @@
             this.OrdersButton.TabIndex = 5;
             this.OrdersButton.Text = "Замовлення";
             this.OrdersButton.UseVisualStyleBackColor = true;
+            this.OrdersButton.Click += new System.EventHandler(this.OrdersButton_Click);
             // 
             // CustomersButton
             // 
@@ -106,6 +109,7 @@
             this.CustomersButton.TabIndex = 6;
             this.CustomersButton.Text = "Покупці";
             this.CustomersButton.UseVisualStyleBackColor = true;
+            this.CustomersButton.Click += new System.EventHandler(this.CustomersButton_Click);
             // 
             // ComponentsButton
             // 
@@ -115,6 +119,7 @@
             this.ComponentsButton.TabIndex = 7;
             this.ComponentsButton.Text = "Компоненти";
             this.ComponentsButton.UseVisualStyleBackColor = true;
+            this.ComponentsButton.Click += new System.EventHandler(this.ComponentsButton_Click);
             // 
             // ProductTypesButton
             // 
@@ -124,6 +129,7 @@
             this.ProductTypesButton.TabIndex = 8;
             this.ProductTypesButton.Text = "Типи товарів";
             this.ProductTypesButton.UseVisualStyleBackColor = true;
+            this.ProductTypesButton.Click += new System.EventHandler(this.ProductTypesButton_Click);
             // 
             // ShopsButton
             // 

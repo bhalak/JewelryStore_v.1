@@ -24,7 +24,7 @@
     <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="NumOfStreet" Type="int" Nullable="false" />
+    <Property Name="NumOfStreet" Type="nvarchar" MaxLength="8" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -33,7 +33,7 @@
     <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_ref" Type="int" />
     <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
     <Property Name="Customer_ref" Type="int" />
   </EntityType>
   <EntityType Name="Order_Product">
@@ -43,16 +43,16 @@
     </Key>
     <Property Name="Product_ref" Type="int" Nullable="false" />
     <Property Name="Order_ref" Type="int" Nullable="false" />
-    <Property Name="Quantity" Type="int" />
+    <Property Name="CurrentCost" Type="decimal" Precision="18" Scale="3" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductId" />
     </Key>
     <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="TotalMass" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="Store_ref" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="TotalMass" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="Store_ref" Type="int" />
     <Property Name="IsAvaliable" Type="bit" Nullable="false" />
     <Property Name="Type_ref" Type="int" Nullable="false" />
   </EntityType>
@@ -63,7 +63,7 @@
     </Key>
     <Property Name="Component_ref" Type="int" Nullable="false" />
     <Property Name="Product_ref" Type="int" Nullable="false" />
-    <Property Name="PartMass" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="PartMass" Type="decimal" Precision="18" Scale="3" Nullable="false" />
   </EntityType>
   <EntityType Name="Rule">
     <Key>
@@ -76,8 +76,8 @@
     <Key>
       <PropertyRef Name="ObjectId" />
     </Key>
+    <Property Name="ObjectId" Type="int" Nullable="false" />
     <Property Name="TotalProductCost" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="ObjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -104,7 +104,7 @@
     <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="150" />
     <Property Name="Rule_ref" Type="int" />
-    <Property Name="Password" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="8" Nullable="false" />
   </EntityType>
   <Association Name="FK_Order_Customer">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -164,26 +164,24 @@
         <PropertyRef Name="ComponentId" />
       </Principal>
       <Dependent Role="Product_Component">
-        <PropertyRef Name="Product_ref" />
+        <PropertyRef Name="Component_ref" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Component_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Product_Component" Type="Self.Product_Component" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="ProductId" />
       </Principal>
       <Dependent Role="Product_Component">
-        <PropertyRef Name="Component_ref" />
+        <PropertyRef Name="Product_ref" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Store">
-    <End Role="Store" Type="Self.Store" Multiplicity="1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Store">
@@ -230,6 +228,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Jewelry_StoreModelStoreContainer">
     <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />

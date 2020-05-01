@@ -32,14 +32,17 @@ namespace Jewelry_Store
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //AuthorizationForm form = new AuthorizationForm();
-            //form.Show();
             GlobalInfo.authorizationForm.Show();
             GlobalInfo.mainWindow.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
             var usersForm = new UsersForm();
             this.Hide();
             usersForm.Show();
@@ -50,6 +53,59 @@ namespace Jewelry_Store
             var storeForm = new StoreForm();
             this.Hide();
             storeForm.Show();
+        }
+
+        private void ProductTypesButton_Click(object sender, EventArgs e)
+        {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
+
+            var typeForm = new PtoductTypesForm();
+            this.Hide();
+            typeForm.Show();
+        }
+
+        private void CustomersButton_Click(object sender, EventArgs e)
+        {
+            var customersForm = new CustomersForm();
+            this.Hide();
+            customersForm.Show();
+        }
+
+        private void ComponentsButton_Click(object sender, EventArgs e)
+        {
+            if (GlobalInfo.currentUser.Rule.LevelAccess != "менеджер")
+            {
+                MessageBox.Show("У вас недостатньо прав, щоб здійснити дану операцію!");
+                return;
+            }
+            var componentsForm = new ComponentsForm();
+            this.Hide();
+            componentsForm.Show();
+        }
+
+        private void ProductsButton_Click(object sender, EventArgs e)
+        {
+            var productsForm = new ProductsForm();
+            this.Hide();
+            productsForm.Show();
+        }
+
+        private void OrdersButton_Click(object sender, EventArgs e)
+        {
+            var ordersForm = new OrdersForm();
+            this.Hide();
+            ordersForm.Show();
+        }
+
+        private void SaleButton_Click(object sender, EventArgs e)
+        {
+            var saleForm = new SaleForm();
+            this.Hide();
+            saleForm.Show();
         }
     }
 }

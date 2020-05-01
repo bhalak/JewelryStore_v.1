@@ -18,7 +18,7 @@ namespace Jewelry_Store
         public string Country { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public int NumOfStreet { get; set; }
+        public string NumOfStreet { get; set; }
     
         public virtual Store Store { get; set; }
     }
